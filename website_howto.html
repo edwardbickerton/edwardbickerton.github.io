@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- #include file="navmenu.shtml" -->
+<html>
+    <head>
+        <title>Satsuma.blog</title>
+        <meta name="description" content="Welcome to my website!">
+        <link rel="stylesheet" href="style.css" />
+        <script src="website.js"></script>
+    </head>
+    <body>
+        <header-component></header-component>
+        <h1>Like this website? Make your own</h1>
+        <a href="https://github.com/Satsuma-LN/Satsuma-LN.github.io" target=_blank>
+            <img src="images/satsuma.png" style='vertical-align:middle;' width="400px"/>
+        </a>
+        <section>
+            <h2>How I made this website:</h2>
+            <p>
+                I used 
+                <a href="https://www.youtube.com/playlist?list=PLZlA0Gpn_vH-cEDOofOujFIknfZZpIk3a" target=_blank>this guide</a>
+                from the youtube channel 
+                <a href="https://www.youtube.com/c/WebDevSimplified" target=_blank>Web Dev Simplified</a> to create all of the 
+                html (hypertext markup language), css (cascading style sheets) and javascript files for this website, all of 
+                which can be found on this 
+                <a href="https://github.com/Satsuma-LN/Satsuma-LN.github.io" target=_blank>github repository</a>. I use github
+                pages to host this website for free.
+            </p>
+            <p>
+                I found 
+                <a href="https://www.freecodecamp.org/news/reusable-html-components-how-to-reuse-a-header-and-footer-on-a-website/" target=_blank>this article</a>
+                written by <a href="https://www.freecodecamp.org/news/author/kris/" target=_blank>Kris Koishigawa</a> very
+                helpfull for creating a reusable header and footer in javascript.
+            </p>
+        </section>
+        <section>
+            <h2>How to guide</h2>
+            <ol>
+                <li><h3>GitHub</h3></li>
+                <p>
+                    Go to <a href="https://github.com" target=_blank>github.com</a> and create or login to an account which 
+                    will be used to host your website. Create a repository and name it YOUR_GITHUB_USERNAME.github.io make sure
+                    it's public and hit create repository (remember to change the YOUR_GITHUB_USERNAME).
+                </p>
+                <img src="images/website_howto/website_howto1.png" class="screenshot"/>
+                <p>
+                    Next download <a href="https://desktop.github.com" target=_blank>GitHub desktop</a>, open it and login using
+                    the same github account you used earlier. Clone the repository you created as well, this will create a
+                    folder on your computer with all of the files from the repository (which should be empty if you just created it).
+                </p>
+                <li><h3>Visual Studio Code</h3></li>
+                <p>
+                    Go to <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a> and download visual
+                    studio code for your computer. I also recommend installing the extensions live server (reloads the webpage 
+                    automatically when your editing it) and code spell checker. It is also useful to turn on auto save, go to 
+                    file > auto save.
+                </p>
+                <img src="images/website_howto/website_howto2.png" class="screenshot"/>
+                <p>
+                    You can now go to file > open and select your cloned github repository you made earlier in github desktop.
+                    Now create your websites html, css and javascript files. Right click a html file in the explorer side bar
+                    and click open with live server to view your website as you edit.
+                </p>
+                <p>
+                    Once your happy with your website, open github desktop and go to the YOUR_GITHUB_USERNAME.github.io, you
+                    should see some changes similar to below, add a summary (e.g update or new blog post) and hit commit to main.
+                </p>
+                <img src="images/website_howto/website_howto3.png" class="screenshot"/>
+                <p>
+                    Congratulations your website should now be live at https://YOUR_GITHUB_USERNAME.github.io
+                </p>
+                <li><h3>Optional - use a custom domain</h3></li>
+                <p>
+                    I got my domain (<a href="https://satsuma.blog" target="_blank">satsuma.blog</a>) from <a href="https://www.namecheap.com" target="blank">namecheap</a> for
+                    about £5 a year. Setting up your domain name will differ slightly depending on where you got your domain,
+                    however the first step is to go to your websites github repository, go to settings > pages and type in your domain name
+                    under custom domain,
+                </p>
+                <img src="images/website_howto/website_howto4.png" class="screenshot"/>
+                <p>
+                    next you need to create "A" records which point your domain to the IP addresses for github pages:
+                </p>
+                <p class="code">
+                    185.199.108.153<br>
+                    185.199.109.153<br>
+                    185.199.110.153<br>
+                    185.199.111.153
+                </p>
+                <p>
+                    <a href="https://www.namecheap.com/support/knowledgebase/article.aspx/9645/2208/how-do-i-link-my-domain-to-github-pages/" target="_blank">here</a>
+                    is a guide on how to do this if you used namecheap to buy your domain. For more information on setting up your custom
+                    domain, see the relevant <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site" target="_blank">github doc</a>.
+                </p>
+            </ol>
+        </section>
+    </body>
+    <footer-component></footer-component>
+</html>
