@@ -1,2 +1,2 @@
 # Satsuma-LN.github.io
-Welcome to my website
+Welcome to my websites github repository!
