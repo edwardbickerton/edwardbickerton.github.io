@@ -115,5 +115,10 @@ a {
 }
 
 strong {
-  color: red;
+  font-weight: 900;
+  color:orange;
+}
+
+.diagram {
+  width: 1000px;
 }
