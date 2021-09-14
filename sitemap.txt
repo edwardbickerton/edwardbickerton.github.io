@@ -1,9 +1,9 @@
 https://satsuma.blog
 https://satsuma.blog/index.html
-https://satsuma.blog/blog.html
-https://satsuma.blog/node.html
-https://satsuma.blog/bisq.html
-https://satsuma.blog/seed_phrase.html
-https://satsuma.blog/website_howto.html
-https://satsuma.blog/generating_seedphrase.html
-https://satsuma.blog/specter.html
+https://satsuma.blog/html/blog.html
+https://satsuma.blog/html/node.html
+https://satsuma.blog/html/blog_posts/bisq.html
+https://satsuma.blog/html/blog_posts/seed_phrase.html
+https://satsuma.blog/html/blog_posts/website_howto.html
+https://satsuma.blog/html/blog_posts/generating_seedphrase.html
+https://satsuma.blog/html/blog_posts/specter.html

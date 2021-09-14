@@ -1,13 +1,13 @@
 // Reuseable header
 const headerTemplate = document.createElement('template');
 headerTemplate.innerHTML = `
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/CSS/style.css" />
   <header>
     <nav>
-      <a href="index.html"><button class="header_btn">home</button></a>
-      <a href="blog.html"><button class="header_btn">blog</button></a>
-      <a href="node.html"><button class="header_btn">node</button></a>
-      <a href="bisq.html"><button class="header_btn" id="buy_btn">buy BTC</button></a>
+      <a href="/index.html"><button class="header_btn">home</button></a>
+      <a href="/html/blog.html"><button class="header_btn">blog</button></a>
+      <a href="/html/node.html"><button class="header_btn">node</button></a>
+      <a href="/html/blog_posts/bisq.html"><button class="header_btn" id="buy_btn">buy BTC</button></a>
     </nav>
     <hr>
   </header>
@@ -30,7 +30,7 @@ customElements.define('header-component', Header);
 // Reuseable footer
 const footerTemplate = document.createElement('template');
 footerTemplate.innerHTML = `
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/CSS/style.css" />
   <br>
   <footer>
     <hr>

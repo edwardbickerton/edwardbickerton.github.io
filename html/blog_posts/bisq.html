@@ -5,15 +5,15 @@
         <title>satsuma.blog</title>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <meta name="description" content="Welcome to my blog!"/>
-        <link rel="stylesheet" href="style.css" />
-        <script src="website.js"></script>
+        <link rel="stylesheet" href="/CSS/style.css" />
+        <script src="/javascript/website.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <header-component></header-component>
         <h1>Buying BTC with Bisq</h1>
         <a href="https://bisq.network" target=_blank>
-            <img src="images/bisq/bisq_logo.png" style='vertical-align:middle;' width="20%"/>
+            <img src="/images/bisq/bisq_logo.png" style='vertical-align:middle;' width="20%"/>
         </a>
         <section>
             Contents
@@ -44,7 +44,7 @@
                     download the corresponding files for your computer, this guide was done on a mac so I'll download the .dmg
                     file and the corresponding PGP signature.
                 </p>
-                <img src="images/bisq/bisq1.png" class="screenshot"/>
+                <img src="/images/bisq/bisq1.png" class="screenshot"/>
                 <p>
                     The next few steps are to ensure that the .dmg file is authentic. Open the terminal app and run (copy and
                     paste the following line into the terminal window and hit enter)
@@ -53,15 +53,15 @@
                 <p>
                     hit enter, type your password if prompted and wait for homebrew to install.
                 </p>
-                <img src="images/bisq/bisq2.png" class="terminal"/>
+                <img src="/images/bisq/bisq2.png" class="terminal"/>
                 <p>
                     If you get the warning message /opt/homebrew/bin is not in your path follow the instructions under 
                     "Next steps". Then run the two lines separately
                 </p>
-                <img src="images/bisq/bisq3.png" class="terminal"/>
+                <img src="/images/bisq/bisq3.png" class="terminal"/>
                 <p class="code">brew install gnupg</p>
                 <p class="code">curl https://bisq.network/pubkey/29CDFD3B.asc | gpg --import</p>
-                <img src="images/bisq/bisq4.png" class="terminal"/>
+                <img src="/images/bisq/bisq4.png" class="terminal"/>
                 <p>
                     The previous command imports the public key of Christoph Attender (ripcurlx). His public key ID is 29CDFD3B
                     and fingerprint is CB36 D7D2 EBB2 E35D 9B75 500B CD5D C1C5 29CD FD3B, which you can verify throough 
@@ -73,13 +73,13 @@
                 <p>
                     replacing Bisq-1.7.3.dmg.asc with the file name of the .asc file you downloaded.
                 </p>
-                <img src="images/bisq/bisq5.png" class="terminal"/>
+                <img src="/images/bisq/bisq5.png" class="terminal"/>
                 <p>
                     If all is well you should get a message similar to the one above, check that the key fingerprint is correct.
                     Congratulations you have verified that the .dmg file you downloaded is authentic and it is safe to open it,
                     and install Bisq.
                 </p>
-                <img src="images/bisq/bisq6.png" class="screenshot"/>
+                <img src="/images/bisq/bisq6.png" class="screenshot"/>
                 <p>
                     If you are using a newer m1 mac when you open bisq for the first time you may be prompted to install Rosetta
                     if you have not done so before. If you get a message:"Bisq" can't be opened because it was not downloaded from
@@ -88,50 +88,50 @@
                 </p>
                 <div class="row">
                     <div class="column">
-                      <img src="images/bisq/bisq7.png" style="width:95%">
+                      <img src="/images/bisq/bisq7.png" style="width:95%">
                     </div>
                     <div class="column">
-                      <img src="images/bisq/bisq8.png" style="width:50%">
+                      <img src="/images/bisq/bisq8.png" style="width:50%">
                     </div>
                     <div class="column">
-                      <img src="images/bisq/bisq9.png" style="width:110%">
+                      <img src="/images/bisq/bisq9.png" style="width:110%">
                     </div>
                   </div>
                 <li><h3>Getting started with Bisq</h3></li>
                 <p>
                     The first time you open Bisq you should be greated by a screen like this
                 </p>
-                <img src="images/bisq/bisq10.png" class="screenshot">
+                <img src="/images/bisq/bisq10.png" class="screenshot">
                 <p>
                     Before you make a trade there are several things you should do:
                 </p>
                 <p>
                     Set a strong password
                 </p>
-                <img src="images/bisq/bisq11.png" class="screenshot">
+                <img src="/images/bisq/bisq11.png" class="screenshot">
                 <p>
                     Write down your wallets seed words, these words give access to any funds in your Bisq wallet so keep it
                     secure
                 </p>
-                <img src="images/bisq/bisq12.png" class="screenshot">
+                <img src="/images/bisq/bisq12.png" class="screenshot">
                 <p>
                     Create a payment account (faster payments is a popular payment method in the uk)
                 </p>
-                <img src="images/bisq/bisq13.png" class="screenshot">
+                <img src="/images/bisq/bisq13.png" class="screenshot">
                 <p>
                     Backup Bisq, this should be done regularly
                 </p>
-                <img src="images/bisq/bisq14.png" class="screenshot">
+                <img src="/images/bisq/bisq14.png" class="screenshot">
                 <li><h3>Making a trade</h3></li>
-                <img src="images/bisq/bisq15.png" class="screenshot">
+                <img src="/images/bisq/bisq15.png" class="screenshot">
                 <p>
                     You are now ready to make a trade, you can either take an existing offer or create a new offer, the maker
                     fees are 0.1% and the taker fees are 0.7%. When creating an offer you can set a percentage to deviate from
                     the current market price, so it often pays to be patient and create your own offer.
                 </p>
-                <img src="images/bisq/bisq16.png" class="screenshot">
+                <img src="/images/bisq/bisq16.png" class="screenshot">
                 <br>
-                <img src="images/bisq/bisq17.png" class="screenshot">
+                <img src="/images/bisq/bisq17.png" class="screenshot">
                 <p>
                     As you can see from the images above you need to "Fund your offer", this is to pay for the trading fee and
                     the security deposit (more on this later). This is awkward as you need bitcoin to be able to buy bitcoin,
@@ -149,7 +149,7 @@
                 of the trade. A signed transaction which sends all funds in the multisig to the Bisq donation address is signed 
                 which can only be published after 20 days for fiat trades.
             </p>
-            <img src="images/bisq/bisq18.png" class="diagram" style="position:relative; left:50px; width:50%"/>
+            <img src="/images/bisq/bisq18.png" class="diagram" style="position:relative; left:50px; width:50%"/>
             <p>
                 If a trade isn't going as it should you can message your counterparty and if things don't get resolved before
                 the end of the trade period (1 day for Faster Payments) a mediator will suggest a payout, and if things still
