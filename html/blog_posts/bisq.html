@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<!-- #include file="navmenu.shtml" -->
 <html>
     <head>
         <title>satsuma.blog</title>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
-        <meta name="description" content="Welcome to my blog!"/>
+        <meta name="description" content="A guide to using the peer to peer bitcoin exchange bisq."/>
         <link rel="stylesheet" href="/CSS/style.css" />
         <script src="/javascript/website.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,9 +26,9 @@
         <section>
             <h2>Why use Bisq</h2>
             <p>
-                Bisq is a P2P (peer to peer) decentralised exchange, this means when you buy or sell bitcoin you interact 
+                Bisq is a P2P (peer to peer) decentralized exchange, this means when you buy or sell bitcoin you interact 
                 directly with the person on the other side of the trade. The main benefit of this in my mind is privacy:
-                you do not need to go through any KYC (know your customer) as you would with centralised exchanges such as 
+                you do not need to go through any KYC (know your customer) as you would with centralized exchanges such as 
                 coinbase or binance and all of your personal data is stored locally on your own computer. Another plus is 
                 security, you always hold your own keys so you are not exposed to 
                 <a href="https://www.hedgewithcrypto.com/cryptocurrency-exchange-hacks/" target=_blank>exchange hacks</a>.
@@ -64,7 +63,7 @@
                 <img src="/images/bisq/bisq4.png" class="terminal"/>
                 <p>
                     The previous command imports the public key of Christoph Attender (ripcurlx). His public key ID is 29CDFD3B
-                    and fingerprint is CB36 D7D2 EBB2 E35D 9B75 500B CD5D C1C5 29CD FD3B, which you can verify throough 
+                    and fingerprint is CB36 D7D2 EBB2 E35D 9B75 500B CD5D C1C5 29CD FD3B, which you can verify through 
                     <a href="https://github.com/bisq-network/bisq/commits?author=ripcurlx" target=_blank>commits on github</a> 
                     and on <a href="https://keybase.io/ripcurlx" target=_blank>keybase</a>, now run 
                 </p>
@@ -99,7 +98,7 @@
                   </div>
                 <li><h3>Getting started with Bisq</h3></li>
                 <p>
-                    The first time you open Bisq you should be greated by a screen like this
+                    The first time you open Bisq you should be greeted by a screen like this
                 </p>
                 <img src="/images/bisq/bisq10.png" class="screenshot">
                 <p>
@@ -143,17 +142,17 @@
         <section>
             <h2>How it works</h2>
             <p>
-                During a trade both partys have to pay a security deposit, all trade funds (deposits, trade ammount and fees)
-                are sent to a 2 of 2 multisig escrow with each party holding one of the keys, this means in order to move
-                bitcoin from this multisig both partys need to sign the transaction i.e both partys need to agree on the payout
-                of the trade. A signed transaction which sends all funds in the multisig to the Bisq donation address is signed 
-                which can only be published after 20 days for fiat trades.
+                During a trade both parties have to pay a security deposit (this ensures everyone acts honestly), all trade funds (deposits, trade
+                amount and fees) are sent to a 2 of 2 multisig escrow with each party holding one of the keys, this means in order to move bitcoin
+                from this multisig both parties need to sign the transaction i.e both parties need to agree on the payout of the trade. A signed 
+                transaction which sends all funds in the multisig to the Bisq donation address is signed which can only be published after 20 
+                days for fiat trades.
             </p>
             <img src="/images/bisq/bisq18.png" class="diagram" style="position:relative; left:50px; width:50%"/>
             <p>
-                If a trade isn't going as it should you can message your counterparty and if things don't get resolved before
+                If a trade isn't going as it should you can message your counter-party and if things don't get resolved before
                 the end of the trade period (1 day for Faster Payments) a mediator will suggest a payout, and if things still
-                aren't resolved you can publish the timelocked transaction and go to arbitration. More on dispute resolution
+                aren't resolved you can publish the time-locked transaction and go to arbitration. More on dispute resolution
                 can be found <a href="https://bisq.wiki/Dispute_resolution" target=_blank>here</a>.
             </p>
         </section>

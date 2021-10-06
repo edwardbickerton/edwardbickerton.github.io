@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>satsuma.blog</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+        <meta name="description" content="How does RSA encryption work?"/>
+        <link rel="stylesheet" href="/CSS/style.css" />
+        <script src="/javascript/website.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header-component></header-component>
+        <h1>RSA Encryption</h1>
+        <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)" target=_blank>
+            <img src="/images/RSA_encryption/RSA_image.png" style='vertical-align:middle;' width="55%"/>
+        </a>
+        <section>
+            Contents
+            <ul>
+                <li>Keys</li>
+                <li>Encryption</li>
+                <li>Decryption</li>
+                <li>Python Implementation</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Keys</h2>
+            <p>
+                Naturally, private keys are kept private and public keys are made public.
+            </p>
+            <p style="text-align: center;">
+                Private key = (p,q) where p and q are primes
+            </p>
+            <p style="text-align: center;">
+                Public key = (N,e) where N = p*q and e = 65537
+            </p>
+        </section>
+        <section>
+            <h2>Encryption</h2>
+            <p>
+                The message is converted to an integer, m. This integer m must be smaller than N and ideally smaller than both p and q, it is 
+                converted to ciphertext by the following:
+            </p>
+            <p>
+                Ciphertext,
+            </p>
+            <p style="text-align: center;">
+                c = m<sup>e</sup> (mod N)
+            </p>
+            <p>
+                (See <a href="https://en.wikipedia.org/wiki/Modular_arithmetic" target=_blank>modular arithmetic</a> for an explanation of the
+                (mod N) notation.)
+            </p>
+        </section>
+        <section>
+            <h2>Decryption</h2>
+            <p>
+                To find m from c it suffices to find the multiplicative inverse of e modulo &phi;(N) i.e. d such that e*d = 1 mod(&phi;(N)),
+                where &phi; is <a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function" target=_blank>Euler's totient function</a>. Then by 
+                <a href="https://en.wikipedia.org/wiki/Euler%27s_theorem" target=_blank>Euler's theorem</a> we have that:
+            </p>
+            <p style="text-align: center;">
+                c<sup>d</sup> = m<sup>e*d</sup> = m<sup>k*&phi;(m) + 1</sup> = (m<sup>k</sup>)<sup>&phi;(N)</sup>*m = m mod(N)
+            </p>
+            <p>
+                (Since e*d = k*&phi;(m) + 1 for some integer k.)
+            </p>
+            <p>
+                Conveniently, &phi;(N) is easy to calculate if you know the prime decomposition of N but very hard to calculate for large N if 
+                you do not know the prime decomposition of N, and factoring N is very hard when N is the product of two very large prime numbers.
+            </p>
+            <p style="text-align: center;">
+                &phi;(N) = (p-1)*(q-1) = N - (p+q) + 1
+            </p>
+        </section>
+        <section>
+            <h2>Signing messages</h2>
+            <p>
+                Let h be the <a href="https://en.wikipedia.org/wiki/Hash_function" target=_blank>hash</a> of the message.
+            </p>
+            <p style="text-align: center;">
+                h = hash(message)
+            </p>
+            <p>
+                The signature is the integer s,
+            </p>
+            <p style="text-align: center;">
+                s = h<sup>d</sup> mod(N)
+            </p>
+            <p>
+                Where d is the multiplicative inverse of e modulo &phi;(N) as in the decryption section above. Thus only the owner of a private 
+                key can produce a valid signature butanyone can verify the validity of this signature by confirming that s<sup>e</sup> = h mod(N)
+                since again by <a href="https://en.wikipedia.org/wiki/Euler%27s_theorem" target=_blank>Euler's theorem</a>:
+            </p>
+            <p style="text-align: center;">
+                s<sup>e</sup> = (h<sup>d</sup>)<sup>e</sup> = h<sup>d*e</sup> = h<sup>e*d</sup> = h mod(N)
+            </p>
+            <p>
+                Thus proving that the message is from the owner of the private key corresponding to the public key (N,e) and that the message has
+                not been tampered with.
+            </p>
+        </section>
+        <section>
+            <h2>Python Implementation</h2>
+            <p>
+                Check out <a href="/python/RSA cryptosystem/RSA.py">this</a> implementation I wrote in Python with a gui made with tkinter. To
+                run it you'll need a way to run python files. On mac python should already be installed, open the terminal app, type python, drag
+                and drop the file into the terminal window <strong>then</strong> hit enter.
+            </p>
+            <p>
+                Try sending an encrypted message to me (via any method in the footer), my public key is:
+            </p>
+            <p style="text-align: center; font-size: 12px;">
+                pubkey_tWRbnJAvBRQWmEsSv5Ly3Fh7Mxqy0N5ZeJX3WsKryNHX2LVSdeLGsd2lZMMSuNmAWkROGio7fU9jOYvCYqL2VitOaqGXlgD2Ym0z6OhB9MeFjpJOp3gt9yYDHFqaf9iQTJEYFBgrDsuQCMlKPq4U7gkCnR6eYftELYm9nPBFoYWT_h33_
+            </p>
+            <p>
+                (Note: keys and ciphertext are represented in base 62 (i.e. using symbols 0-9, a-z and A-Z) instead of the usual base 10 for 
+                the sake of brevity.)
+            </p>
+        </section>
+        <footer-component></footer-component>
+    </body>
+</html>
