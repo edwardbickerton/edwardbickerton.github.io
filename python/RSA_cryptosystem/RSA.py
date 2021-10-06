@@ -685,7 +685,7 @@ def update_key_OptionMenu():
         public_key_selection.options["menu"].delete(0, tk.END)
 
 
-def Import():
+def Import(new_key=False):
     popup = tk.Toplevel(main_window.root)
     popup.title('Import Key')
     def destroy_popup(event):
@@ -723,6 +723,11 @@ def Import():
         key_txt.delete('1.0', tk.END)
         key_txt.insert('1.0', str(Private_Key(
             Bit_Length=bit_length_choice.get())))
+    
+    if new_key == True:
+        new()
+    else:
+        key_txt.delete('1.0',tk.END)
 
     ttk.Button(option_frame, text="New Private Key",
                command=new).grid(column=2, row=0, padx=4)
@@ -772,8 +777,8 @@ def Import():
 
 
 import_btn.btn.configure(command=Import)
-def Import_event(event):
-    Import()
+def Import_event(event=None):
+    Import(new_key=True)
 
 def Export():
     popup = tk.Toplevel()
@@ -957,7 +962,8 @@ main_window.root.configure(menu=menu)
 
 keys_menu = tk.Menu(menu, tearoff=0)
 keys_menu.add_command(label='View public keys', command=view_pub_keys)
-keys_menu.add_command(label='Delete key', command=Delete_Key)
+keys_menu.add_command(label='New key', command=Import_event, accelerator="Command+N")
+keys_menu.add_command(label='Delete key', command=Delete_Key, accelerator="Command+D")
 menu.add_cascade(label='Keys', menu=keys_menu)
 
 view_menu = tk.Menu(menu, tearoff=0)
@@ -970,7 +976,7 @@ menu.add_cascade(label='View', menu=view_menu)
 clear_menu = tk.Menu(menu, tearoff=0)
 clear_menu.add_command(label="Clear Message", command=clear_Message)
 clear_menu.add_command(label="Clear Ciphertext", command=clear_Ciphertext)
-clear_menu.add_command(label="Clear All", command=clear_Both)
+clear_menu.add_command(label="Clear All", command=clear_Both, accelerator="command+BackSpace")
 menu.add_cascade(label='Clear', menu=clear_menu)
 
 #########
