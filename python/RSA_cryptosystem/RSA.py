@@ -7,6 +7,7 @@ from hashlib import sha256
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+import os.path
 
 ####################
 # Global Variables #
@@ -382,6 +383,7 @@ def import_key(string: str):
         return Public_Key(N, e)
 
     print("ERROR: No valid key!")
+    return
 
 
 def test():
@@ -449,51 +451,48 @@ longer valid as Bob edited the message.\n""")
 class Key_Store(object):
     private_keys = {}
     public_keys = {}
-    key_file = 'keys.txt'
-
+    key_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'keys.txt')
+    
     def read_keys():
         try:
-            open(Key_Store.key_file, 'x')
+            with open(Key_Store.key_file, 'x') as f:
+                f.close()
+                pass
         except:
             pass
-        keys_list = open(Key_Store.key_file, 'r').read().split()
-        if 'Public_Key(s):' in keys_list:
-            pub_key_list = keys_list[keys_list.index('Public_Key(s):')+1:]
-            if 'Private_Key(s):' in keys_list:
-                keys_list = keys_list[keys_list.index('Private_Key(s):')+1:keys_list.index('Public_Key(s):')] + pub_key_list
-            else:
-                keys_list = pub_key_list
-
-        labels = [keys_list[2*i] for i in range(len(keys_list)//2)]
-        keys = [import_key(keys_list[2*i + 1]) for i in range(len(keys_list)//2)]
-        if keys != []:
-            for i in range(len(keys)):
+        with open(Key_Store.key_file, 'r') as f:
+            list = f.readlines()
+            for i in range(len(list)//2):
+                label = list[2*i][:-1]
                 try:
-                    keys[i].label = labels[i]
-                    if type(keys[i]) == Private_Key:
-                        Key_Store.private_keys[keys[i].label] = keys[i]
-                    else:
-                        Key_Store.public_keys[keys[i].label] = keys[i]
+                    key = import_key(list[2*i+1])
                 except:
+                    key = None
+                if type(key) == Private_Key:
+                    key.label = label
+                    Key_Store.private_keys[key.label] = key
+                elif type(key) == Public_Key:
+                    key.label = label
+                    Key_Store.public_keys[key.label] = key
+                else:
                     pass
+            f.close()
+            pass
 
-        for key in Key_Store.private_keys:
-            Key_Store.public_keys[key] = Key_Store.private_keys[key].pub_key
+        for key_label in Key_Store.private_keys:
+            Key_Store.public_keys[key_label] = Key_Store.private_keys[key_label].pub_key
 
 
     def write_keys():
-        for key in Key_Store.private_keys:
-            Key_Store.public_keys[key] = Key_Store.private_keys[key].pub_key
+        with open(Key_Store.key_file, 'w') as f:
+            for key_label in Key_Store.public_keys:
+                if key_label not in Key_Store.private_keys:
+                    f.write(str(key_label)+'\n'+str(Key_Store.public_keys[key_label]+'\n'))
 
-        Private_Keys_txt = 'Private_Key(s):\n'
-        Public_Keys_txt = '\nPublic_Key(s):\n'
-        
-        for key in Key_Store.private_keys:
-            Private_Keys_txt += str(key)+'\n'+str(Key_Store.private_keys[key])+'\n'
-        for key in Key_Store.public_keys:
-            Public_Keys_txt += str(key)+'\n'+str(Key_Store.public_keys[key])+'\n'
-        with open(Key_Store.key_file, '+w') as f:
-            f.write(Private_Keys_txt+Public_Keys_txt)
+            for key_label in Key_Store.private_keys:
+                f.write(str(key_label)+'\n'+str(Key_Store.private_keys[key_label])+'\n')
+            f.close()
+
 
 
 #######
@@ -685,7 +684,10 @@ def update_key_OptionMenu():
         public_key_selection.options["menu"].delete(0, tk.END)
 
 
-def Import(new_key=False):
+def Import(event=None):
+    new_key = False
+    if event:
+        new_key = True
     popup = tk.Toplevel(main_window.root)
     popup.title('Import Key')
     def destroy_popup(event):
@@ -733,11 +735,10 @@ def Import(new_key=False):
                command=new).grid(column=2, row=0, padx=4)
 
     # Save button
-    def save():
+    def save(event=None):
         key = import_key(key_txt.get('1.0', tk.END))
         label = label_var.get()
-        label = ''.join([label[i]
-                        for i in range(len(label)) if label[i] != ' '])
+        label = ''.join([label[i] for i in range(len(label)) if label[i] != ' '])
 
         if label == '':
             messagebox.showwarning("Error", "Key must have a label")
@@ -761,24 +762,25 @@ def Import(new_key=False):
         if type(key) == Private_Key:
             Key_Store.private_keys[label] = key
             Key_Store.write_keys()
+            Key_Store.read_keys()
             update_key_OptionMenu()
             popup.destroy()
         elif type(key) == Public_Key:
             Key_Store.public_keys[label] = key
             Key_Store.write_keys()
+            Key_Store.read_keys()
             update_key_OptionMenu()
             popup.destroy()
         else:
             messagebox.showwarning("Error", "No valid key entered.")
             return
 
+    popup.bind('<Return>', save)
     ttk.Button(option_frame, text="Save", command=save).grid(
         column=3, row=0, padx=4)
 
 
 import_btn.btn.configure(command=Import)
-def Import_event(event=None):
-    Import(new_key=True)
 
 def Export():
     popup = tk.Toplevel()
@@ -793,8 +795,15 @@ def Export():
     positionDown = int(popup.winfo_screenheight()/2 - popup_height/2 ) - 150
     popup.geometry("{}x{}+{}+{}".format(popup_width, popup_height, positionRight, positionDown))
     
+    text = 'Public Key(s):\n'
+    for key_label in Key_Store.public_keys:
+        text += '\n'+str(key_label)+'\n'+str(Key_Store.public_keys[key_label])+'\n'
+    text += '\nPrivate Key(s):\n'
+    for key_label in Key_Store.private_keys:
+        text += '\n'+str(key_label)+'\n'+str(Key_Store.private_keys[key_label])+'\n'
+
     keys_text = tk.Text(popup, height=100)
-    keys_text.insert('1.0', open('keys.txt', 'r').read())
+    keys_text.insert('1.0', text)
     keys_text["state"] = tk.DISABLED
     keys_text.pack(fill=tk.BOTH)
 
@@ -803,9 +812,9 @@ export_btn.btn.configure(command=Export)
 
 
 def view_pub_keys():
-    your_pub_key_dict = {}
-    for key in Key_Store.private_keys:
-        your_pub_key_dict[key] = Key_Store.private_keys[key]
+    text = 'Your Public Keys:\n'
+    for key_label in Key_Store.private_keys:
+        text+= '\n'+str(key_label)+'\n'+str(Key_Store.private_keys[key_label].pub_key)+'\n'
     
     popup = tk.Toplevel()
     popup.title('Your Public Keys')
@@ -820,13 +829,12 @@ def view_pub_keys():
     popup.geometry("{}x{}+{}+{}".format(popup_width, popup_height, positionRight, positionDown))
     
     keys_text = tk.Text(popup, height=100)
-    for key in your_pub_key_dict:
-        keys_text.insert(tk.END, str(key)+'\n'+str(your_pub_key_dict[key].pub_key)+'\n')
+    keys_text.insert('1.0', text)
     keys_text["state"] = tk.DISABLED
     keys_text.pack(fill=tk.BOTH)
 
 
-def Delete_Key():
+def Delete_Key(event=None):
     popup = tk.Toplevel()
     popup.title('Delete Key')
     def destroy_popup(event):
@@ -904,7 +912,7 @@ def Delete_Key():
         
     ttk.Button(popup, text="Delete All Keys", command=delete_all_keys).grid(row=4, column=0)
     
-    def delete_key():
+    def delete_key(event=None):
         key = selected_key.get()
         if var.get() == 'Private Key':
             answer =  messagebox.askokcancel(title="WARNING!", message="WARNING!\nThis will delete the private key:\n"+str(key)+"\nAND it's corresponding public key")
@@ -927,9 +935,7 @@ def Delete_Key():
     delete_key_btn = ttk.Button(popup, text="Delete Key", command=delete_key)
     delete_key_btn["state"] = tk.DISABLED
     delete_key_btn.grid(row=4, column=1)
-
-def Delete_Key_event(event):
-    Delete_Key()
+    popup.bind('<Return>', delete_key)
     
 def set_theme(*args):
     theme = main_window.theme_var.get()
@@ -946,12 +952,9 @@ def clear_Message():
 def clear_Ciphertext():
     clear(ciphertext_input)
 
-def clear_Both():
+def clear_Both(event=None):
     clear_Message()
     clear_Ciphertext()
-
-def clear_Both_event(event):
-    clear_Both()
 
 ########
 # Menu #
@@ -962,7 +965,7 @@ main_window.root.configure(menu=menu)
 
 keys_menu = tk.Menu(menu, tearoff=0)
 keys_menu.add_command(label='View public keys', command=view_pub_keys)
-keys_menu.add_command(label='New key', command=Import_event, accelerator="Command+N")
+keys_menu.add_command(label='New key', command= lambda: Import('event'), accelerator="Command+N")
 keys_menu.add_command(label='Delete key', command=Delete_Key, accelerator="Command+D")
 menu.add_cascade(label='Keys', menu=keys_menu)
 
@@ -983,9 +986,9 @@ menu.add_cascade(label='Clear', menu=clear_menu)
 # Binds #
 #########
 
-main_window.root.bind_all('<Command-Key-d>', Delete_Key_event)
-main_window.root.bind_all('<Command-Key-n>', Import_event)
-main_window.root.bind_all('<Command-Key-BackSpace>', clear_Both_event)
+main_window.root.bind_all('<Command-Key-d>', Delete_Key)
+main_window.root.bind_all('<Command-Key-n>', Import)
+main_window.root.bind_all('<Command-Key-BackSpace>', clear_Both)
 
 #################
 # Launching GUI #
