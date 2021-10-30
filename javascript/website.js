@@ -1,4 +1,4 @@
-// Reuseable header
+// Reuseable header (buy btc button <a href="/html/blog_posts/bisq.html"><button class="header_btn" id="buy_btn">buy BTC</button></a>)
 const headerTemplate = document.createElement('template');
 headerTemplate.innerHTML = `
   <link rel="stylesheet" href="/CSS/style.css" />
@@ -7,7 +7,6 @@ headerTemplate.innerHTML = `
       <a href="/index.html"><button class="header_btn">home</button></a>
       <a href="/html/blog.html"><button class="header_btn">blog</button></a>
       <a href="/html/node.html"><button class="header_btn">node</button></a>
-      <a href="/html/blog_posts/bisq.html"><button class="header_btn" id="buy_btn">buy BTC</button></a>
     </nav>
     <hr>
   </header>
