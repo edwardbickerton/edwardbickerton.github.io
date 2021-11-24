@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>satsuma.blog</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+        <meta name="description" content="A guide to using Kiwix for offline viewing of websites such as wikipedia."/>
+        <link rel="stylesheet" href="/CSS/style.css" />
+        <script src="/javascript/website.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header-component></header-component>
+        <h1>Download the Internet*</h1>
+        <a href="https://www.kiwix.org/en/" target=_blank>
+            <img src="/images/download_the_internet/kiwix-logo.png" style='vertical-align:middle;' width="50%"/>
+        </a>
+        <section>
+            <p>*well, some important parts at least.</p>
+        </section>
+        <section>
+            Contents
+            <ul>
+                <li>Why?</li>
+                <li>How</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Why?</h2>
+            <p>
+                In a post apocalyptic world the job of rebuilding civilization is left to a few survivors. But theres no need to start from 
+                zero, give humanity a head start by keeping a couple copies of wikipedia around. You can download the entirety of wikipedia 
+                taking up less than just 100 gigabytes of data! Or a slimmed down mini version of wikipedia for just 10 gigabytes! It goes 
+                beyond wikipedia though, using <a href="https://www.kiwix.org/en/" target="_blank">Kiwix</a> you can download all sorts of useful 
+                content, like <a href="https://www.wikem.org/wiki/Main_Page" target=_blank>WikEm</a> the "world's largest emergency medicine 
+                open-access resource" or various videos from youtube.
+            </p>
+            <p>
+                In all seriousness I don't think I really need to explain the utility of having access to the most important parts of the internet
+                while offline, whether in an emergency scenario or if your just away from internet access.
+            </p>
+            <p>
+                Note: if you are a doomsday preper you might be interested in <a href="https://youtu.be/XMVYaW8ebNU" target="_blank">this</a>,
+                and <a href="https://youtu.be/R63x2TXm0s8" target="_blank">this</a> video. They essentially go through making a really 
+                rugged "laptop" (a raspberrypi in a pelican case) with wikipedia and a bunch of useful information on (badass).
+            </p>
+            <a href="https://back7.co/home/raspberry-pi-recovery-kit" target=_blank>
+                <img src="/images/download_the_internet/rpi_internet_box.jpg" style='vertical-align:middle;' width="50%"/>
+            </a>
+        </section>
+        <section>
+            <h2>How</h2>
+            <p>
+                It's worth noting there is more than one way of doing this, essentially you download some software from kiwix and download some 
+                .zim files which are "highly compressed copies of entire websites", you can then view the websites offline with a similar 
+                experience to normal internet browsing using the kiwix software.
+            </p>
+            <p>
+                Go to <a href="https://www.kiwix.org/en/download/" target="_blank">the download page of kiwix</a> and download the appropriate 
+                version. They offer many versions, supporting platforms from android to macOS.
+            </p>
+            <p>
+                Somewhat annoyingly for the macOS and browser extension versions you cannot download the .zim files from within the application.
+                If you download this 
+                <a href="https://docs.google.com/spreadsheets/d/1lWXdwy3OIfZ1Ob2cQR707OMHSva3khTcAXZE9MK9ad8/edit#gid=598202886" target="_blank">google sheets</a>
+                spreadsheet from kiwix with download links for .zim files as a csv (comma separated values) file you can use 
+                <a href="https://" target=_blank>this</a> python code to filter through it and find what you want.
+            </p>
+            <pre class="code">
+                Sources I want:
+                ['Wikipedia', 'Wikibooks', 'Wikiquote', 'Wiktionary', 'Wikem']
+
+                The biggest from these sources:
+
+                {'Description': 'The free encyclopedia',
+                'Flavour': 'Full',
+                'Language': 'English',
+                'Source': 'Wikipedia',
+                'Title': 'Wikipedia',
+                'URL': 'http://download.kiwix.org/zim/wikipedia_en_all_maxi.zim',
+                '_size': '83107984'}
+
+                {'Description': 'From Wikibooks, open books for an open world',
+                'Flavour': 'Full',
+                'Language': 'English',
+                'Source': 'Wikibooks',
+                'Title': 'Wikibooks',
+                'URL': 'http://download.kiwix.org/zim/wikibooks_en_all_maxi.zim',
+                '_size': '4405230'}
+
+                {'Description': 'From Wikiquote',
+                'Flavour': 'Full',
+                'Language': 'English',
+                'Source': 'Wikiquote',
+                'Title': 'Wikiquote',
+                'URL': 'http://download.kiwix.org/zim/wikiquote_en_all_maxi.zim',
+                '_size': '607235'}
+
+                {'Description': 'Definition from Wiktionary, the free dictionary',
+                'Flavour': 'Full',
+                'Language': 'English',
+                'Source': 'Wiktionary',
+                'Title': 'Wiktionary',
+                'URL': 'http://download.kiwix.org/zim/wiktionary_en_all_maxi.zim',
+                '_size': '5920770'}
+
+                {'Description': "The world's largest emergency medicine open-access resource",
+                'Flavour': 'Full',
+                'Language': 'English',
+                'Source': 'Wikem',
+                'Title': 'WikEM',
+                'URL': 'http://download.kiwix.org/zim/wikem_en_all_maxi.zim',
+                '_size': '39695'}
+            </pre>
+        </section>
+        <footer-component></footer-component>
+    </body>
+</html>

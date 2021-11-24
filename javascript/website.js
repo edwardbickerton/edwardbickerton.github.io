@@ -37,11 +37,11 @@ footerTemplate.innerHTML = `
       <li><a href="mailto:satsuma_ln@icloud.com"><button class="footer_btn">
         Email
       </button></a></li>
-
+      <!--
       <li><a href="https://twitter.com/Satsuma_LN" target=_blank><button class="footer_btn">
         Twitter
       </button></a></li>
-
+      -->
       <li><a href="https://t.me/Satsuma_LN" target=_blank><button class="footer_btn">
         Telegram
       </button></a></li>
