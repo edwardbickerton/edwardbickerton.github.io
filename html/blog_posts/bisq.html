@@ -1,193 +1,257 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title>satsuma.blog</title>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
-        <meta name="description" content="A guide to using the peer to peer bitcoin exchange bisq."/>
-        <link rel="stylesheet" href="/CSS/style.css" />
-        <script src="/javascript/website.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <header-component></header-component>
-        <h1>Buying BTC with Bisq</h1>
-        <a href="https://bisq.network" target=_blank>
-            <img src="/images/bisq/bisq_logo.png" style='vertical-align:middle;' width="20%"/>
-        </a>
-        <section>
-            Contents
-            <ul>
-                <li>Why use bisq</li>
-                <li>How to guide</li>
-                <li>How it works</li>
-                <li>Bisq 2.0</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Why use Bisq</h2>
-            <p>
-                Bisq is a P2P (peer to peer) decentralized exchange, this means when you buy or sell bitcoin you interact 
-                directly with the person on the other side of the trade. The main benefit of this in my mind is privacy:
-                you do not need to go through any KYC (know your customer) as you would with centralized exchanges such as 
-                coinbase or binance and all of your personal data is stored locally on your own computer. Another plus is 
-                security, you always hold your own keys so you are not exposed to 
-                <a href="https://www.hedgewithcrypto.com/cryptocurrency-exchange-hacks/" target=_blank>exchange hacks</a>.
-            </p>
-            <p>
-                Why is bitcoin privacy important? Firstly because it involves sensitive financial information but especially
-                because transactions are stored in a public and <strong>immutable</strong> ledger. Anyone with an internet
-                connection can see the inputs, outputs and the amounts of any
-                <a href="https://mempool.space/tx/430c23c244fc399660b7b1c2d612d6b4029bbd28ab71e23325657256f0352145" target=_blank>onchain transaction</a>,
-                (a great reason to use off chain layer 2 solutions like <a>lightning</a> or <a>liquid</a>) and while this ledger
-                is pseudonymous, when paired with data from KYC exchanges, companies like <a href="https://www.chainalysis.com" target=_blank>chainalysis</a>
-                can track your bitcoin transactions.
-            </p>
-            <p>
-                If you believe in bitcoin you should expect this ledger to outlive you. So if you mess up your onchain privacy
-                there is nothing you can do to undo your mistake (you can use 
-                <a href="https://www.samouraiwallet.com/whirlpool" target=_blank>coinjoin</a> to get forward privacy however).
-                What if your government decides to <a href="https://en.wikipedia.org/wiki/Executive_Order_6102" target=_blank>seize</a>
-                bitcoins? While the digital nature of bitcoin can make it very hard to seize if
-                <a href="https://btcguide.github.io" target=_blank>secured properly</a>, no one wants to be on the run from a
-                powerful entity such as a government. This might sound very far-fetched and will hopefully never happen in your lifetime,
-                but what about your heirs' lifetime? 
-            </p>
-        </section>
-        <section>
-            <h2>How to guid</h2>
-            <ol>
-                <li><h3>Getting Bisq</h3></li>
-                <p>
-                    First go to <a href="https://bisq.network/downloads/" target=_blank>https://bisq.network/downloads/</a> and
-                    download the corresponding files for your computer, this guide was done on a mac so I'll download the .dmg
-                    file and the corresponding PGP signature.
-                </p>
-                <img src="/images/bisq/bisq1.png" class="screenshot"/>
-                <p>
-                    The next few steps are to ensure that the .dmg file is authentic. Open the terminal app and run (copy and
-                    paste the following line into the terminal window and hit enter)
-                </p>
-                <p class="code">ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</p>
-                <p>
-                    hit enter, type your password if prompted and wait for homebrew to install.
-                </p>
-                <img src="/images/bisq/bisq2.png" class="terminal"/>
-                <p>
-                    If you get the warning message /opt/homebrew/bin is not in your path follow the instructions under 
-                    "Next steps". Then run the two lines separately
-                </p>
-                <img src="/images/bisq/bisq3.png" class="terminal"/>
-                <p class="code">brew install gnupg</p>
-                <p class="code">curl https://bisq.network/pubkey/29CDFD3B.asc | gpg --import</p>
-                <img src="/images/bisq/bisq4.png" class="terminal"/>
-                <p>
-                    The previous command imports the public key of Christoph Attender (ripcurlx). His public key ID is 29CDFD3B
-                    and fingerprint is CB36 D7D2 EBB2 E35D 9B75 500B CD5D C1C5 29CD FD3B, which you can verify through 
-                    <a href="https://github.com/bisq-network/bisq/commits?author=ripcurlx" target=_blank>commits on github</a> 
-                    and on <a href="https://keybase.io/ripcurlx" target=_blank>keybase</a>, now run 
-                </p>
-                <p class="code">cd Downloads</p>
-                <p class="code">gpg --digest-algo SHA256 --verify Bisq-1.7.3.dmg.asc</p>
-                <p>
-                    replacing Bisq-1.7.3.dmg.asc with the file name of the .asc file you downloaded.
-                </p>
-                <img src="/images/bisq/bisq5.png" class="terminal"/>
-                <p>
-                    If all is well you should get a message similar to the one above, check that the key fingerprint is correct.
-                    Congratulations you have verified that the .dmg file you downloaded is authentic and it is safe to open it,
-                    and install Bisq.
-                </p>
-                <img src="/images/bisq/bisq6.png" class="screenshot"/>
-                <p>
-                    If you are using a newer m1 mac when you open bisq for the first time you may be prompted to install Rosetta
-                    if you have not done so before. If you get a message:"Bisq" can't be opened because it was not downloaded from
-                    the App Store, open system preferences and go to security and privacy and hit open anyway. You have now 
-                    installed bisq, you can now eject the bisq volume and delete the .dmg and .asc files. 
-                </p>
-                <div class="row">
-                    <div class="column">
-                      <img src="/images/bisq/bisq7.png" style="width:95%">
-                    </div>
-                    <div class="column">
-                      <img src="/images/bisq/bisq8.png" style="width:50%">
-                    </div>
-                    <div class="column">
-                      <img src="/images/bisq/bisq9.png" style="width:110%">
-                    </div>
-                  </div>
-                <li><h3>Getting started with Bisq</h3></li>
-                <p>
-                    The first time you open Bisq you should be greeted by a screen like this
-                </p>
-                <img src="/images/bisq/bisq10.png" class="screenshot">
-                <p>
-                    Before you make a trade there are several things you should do:
-                </p>
-                <p>
-                    Set a strong password
-                </p>
-                <img src="/images/bisq/bisq11.png" class="screenshot">
-                <p>
-                    Write down your wallets seed words, these words give access to any funds in your Bisq wallet so keep it
-                    secure
-                </p>
-                <img src="/images/bisq/bisq12.png" class="screenshot">
-                <p>
-                    Create a payment account (faster payments is a popular payment method in the uk)
-                </p>
-                <img src="/images/bisq/bisq13.png" class="screenshot">
-                <p>
-                    Backup Bisq, this should be done regularly
-                </p>
-                <img src="/images/bisq/bisq14.png" class="screenshot">
-                <li><h3>Making a trade</h3></li>
-                <img src="/images/bisq/bisq15.png" class="screenshot">
-                <p>
-                    You are now ready to make a trade, you can either take an existing offer or create a new offer, the maker
-                    fees are 0.1% and the taker fees are 0.7%. When creating an offer you can set a percentage to deviate from
-                    the current market price, so it often pays to be patient and create your own offer.
-                </p>
-                <img src="/images/bisq/bisq16.png" class="screenshot"/>
-                <br>
-                <img src="/images/bisq/bisq17.png" class="screenshot"/>
-                <p>
-                    As you can see from the images above you need to "Fund your offer", this is to pay for the trading fee and
-                    the security deposit (more on this later). This is awkward as you need bitcoin to be able to buy bitcoin,
-                    you could buy some bitcoin off a friend or use a
-                    <a href="https://coinatmradar.com" target=_blank>bitcoin atm</a>.
-                </p>
-            </ol>
-        </section>
-        <section>
-            <h2>How it works</h2>
-            <p>
-                During a trade both parties have to pay a security deposit (this ensures everyone acts honestly), all trade funds (deposits, trade
-                amount and fees) are sent to a 2 of 2 multisig escrow with each party holding one of the keys, this means in order to move bitcoin
-                from this multisig both parties need to sign the transaction i.e both parties need to agree on the payout of the trade. A signed 
-                transaction which sends all funds in the multisig to the Bisq donation address is signed which can only be published after 20 
-                days for fiat trades.
-            </p>
-            <img src="/images/bisq/bisq18.png" class="diagram" style="position:relative; left:50px; width:50%"/>
-            <p>
-                If a trade isn't going as it should you can message your counter-party and if things don't get resolved before
-                the end of the trade period (1 day for Faster Payments) a mediator will suggest a payout, and if things still
-                aren't resolved you can publish the time-locked transaction and go to arbitration. More on dispute resolution
-                can be found <a href="https://bisq.wiki/Dispute_resolution" target=_blank>here</a>.
-            </p>
-        </section>
-        <section>
-            <h2>Bisq 2.0 (Misq)</h2>
-            <p>Some upcoming features I got from <a href="https://youtu.be/UOarJpbg4EY" target=_blank>this</a> video.</p>
-            <ul>
-                <li>other financial contracts e.g loans, options</li>
-                <li>integrating external wallets e.g hardware wallets</li>
-                <li>keep offers online when you are offline</li>
-                <li>social and community aspects</li>
-                <li>web and mobile versions</li>
-                <li>other trade protocols</li>
-                <li>release date: TBC</li>
-            </ul>
-        </section>
-        <footer-component></footer-component>
-    </body>
+  <head>
+    <title>Edward Bickerton</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta
+      name="description"
+      content="A guide to using the peer to peer bitcoin exchange bisq."
+    />
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <script src="/javascript/website.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header-component></header-component>
+    <h1>Buying BTC with Bisq</h1>
+    <a href="https://bisq.network" target="_blank">
+      <img
+        src="/images/bisq/bisq_logo.png"
+        style="vertical-align: middle"
+        width="20%"
+      />
+    </a>
+    <section>
+      Contents
+      <ul>
+        <li>How it works</li>
+        <li>Why use bisq</li>
+        <li>How to guide</li>
+
+        <li>Bisq 2.0</li>
+      </ul>
+    </section>
+    <section>
+      <h2>How Bisq works</h2>
+      <p>
+        During a trade both parties have to pay a security deposit (this ensures
+        everyone acts honestly), all trade funds (deposits, trade amount and
+        fees) are sent to a 2 of 2 multisig escrow with each party holding one
+        of the keys, this means in order to move bitcoin from this multisig both
+        parties need to sign the transaction i.e both parties need to agree on
+        the payout of the trade. A signed transaction which sends all funds in
+        the multisig to the Bisq donation address is signed which can only be
+        published after 20 days for fiat trades.
+      </p>
+      <img
+        src="/images/bisq/bisq18.png"
+        class="diagram"
+        style="position: relative; left: 50px; width: 50%"
+      />
+      <p>
+        If a trade isn't going as it should you can message your counter-party
+        and if things don't get resolved before the end of the trade period (1
+        day for Faster Payments) a mediator will suggest a payout, and if things
+        still aren't resolved you can publish the time-locked transaction and go
+        to arbitration. More on dispute resolution can be found
+        <a href="https://bisq.wiki/Dispute_resolution" target="_blank">here</a>.
+      </p>
+    </section>
+    <section>
+      <h2>Why use Bisq</h2>
+      <p>
+        Bisq is a P2P (peer to peer) decentralized exchange, this means when you
+        buy or sell bitcoin you interact directly with the person on the other
+        side of the trade. The main benefit of this in my mind is privacy: you
+        do not need to go through any KYC (know your customer) as you would with
+        centralized exchanges such as coinbase or binance and all of your
+        personal data is stored locally on your own computer. Another plus is
+        security, you always hold your own keys so you are not exposed to
+        <a
+          href="https://www.hedgewithcrypto.com/cryptocurrency-exchange-hacks/"
+          target="_blank"
+          >exchange hacks</a
+        >.
+      </p>
+      <p>
+        Why is bitcoin privacy important? Firstly because it involves sensitive
+        financial information but especially because transactions are stored in
+        a public and <strong>immutable</strong> ledger. Anyone with an internet
+        connection can see the inputs, outputs and the amounts of any
+        <a
+          href="https://mempool.space/tx/430c23c244fc399660b7b1c2d612d6b4029bbd28ab71e23325657256f0352145"
+          target="_blank"
+          >onchain transaction</a
+        >, (a great reason to use off chain layer 2 solutions like
+        <a>lightning</a> or <a>liquid</a>) and while this ledger is
+        pseudonymous, when paired with data from KYC exchanges, companies like
+        <a href="https://www.chainalysis.com" target="_blank">chainalysis</a>
+        can track your bitcoin transactions.
+      </p>
+      <p>
+        If you believe in bitcoin you should expect this ledger to outlive you.
+        So if you mess up your onchain privacy there is nothing you can do to
+        undo your mistake (you can use
+        <a href="https://www.samouraiwallet.com/whirlpool" target="_blank"
+          >coinjoin</a
+        >
+        to get forward privacy however). What if your government decides to
+        <a
+          href="https://en.wikipedia.org/wiki/Executive_Order_6102"
+          target="_blank"
+          >seize</a
+        >
+        bitcoins? While the digital nature of bitcoin can make it very hard to
+        seize if
+        <a href="https://btcguide.github.io" target="_blank">secured properly</a
+        >, no one wants to be on the run from a powerful entity such as a
+        government. This might sound very far-fetched and will hopefully never
+        happen in your lifetime, but what about your heirs' lifetime?
+      </p>
+    </section>
+    <section>
+      <h2>How to guid</h2>
+      <ol>
+        <li><h3>Getting Bisq</h3></li>
+        <p>
+          First go to
+          <a href="https://bisq.network/downloads/" target="_blank"
+            >https://bisq.network/downloads/</a
+          >
+          and download the corresponding files for your computer, this guide was
+          done on a mac so I'll download the .dmg file and the corresponding PGP
+          signature.
+        </p>
+        <img src="/images/bisq/bisq1.png" class="screenshot" />
+        <p>
+          The next few steps are to ensure that the .dmg file is authentic. Open
+          the terminal app and run (copy and paste the following line into the
+          terminal window and hit enter)
+        </p>
+        <p class="code">
+          ruby -e "$(curl -fsSL
+          https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        </p>
+        <p>
+          hit enter, type your password if prompted and wait for homebrew to
+          install.
+        </p>
+        <img src="/images/bisq/bisq2.png" class="terminal" />
+        <p>
+          If you get the warning message /opt/homebrew/bin is not in your path
+          follow the instructions under "Next steps". Then run the two lines
+          separately
+        </p>
+        <img src="/images/bisq/bisq3.png" class="terminal" />
+        <p class="code">brew install gnupg</p>
+        <p class="code">
+          curl https://bisq.network/pubkey/29CDFD3B.asc | gpg --import
+        </p>
+        <img src="/images/bisq/bisq4.png" class="terminal" />
+        <p>
+          The previous command imports the public key of Christoph Attender
+          (ripcurlx). His public key ID is 29CDFD3B and fingerprint is CB36 D7D2
+          EBB2 E35D 9B75 500B CD5D C1C5 29CD FD3B, which you can verify through
+          <a
+            href="https://github.com/bisq-network/bisq/commits?author=ripcurlx"
+            target="_blank"
+            >commits on github</a
+          >
+          and on
+          <a href="https://keybase.io/ripcurlx" target="_blank">keybase</a>, now
+          run
+        </p>
+        <p class="code">cd Downloads</p>
+        <p class="code">gpg --digest-algo SHA256 --verify Bisq-1.7.3.dmg.asc</p>
+        <p>
+          replacing Bisq-1.7.3.dmg.asc with the file name of the .asc file you
+          downloaded.
+        </p>
+        <img src="/images/bisq/bisq5.png" class="terminal" />
+        <p>
+          If all is well you should get a message similar to the one above,
+          check that the key fingerprint is correct. Congratulations you have
+          verified that the .dmg file you downloaded is authentic and it is safe
+          to open it, and install Bisq.
+        </p>
+        <img src="/images/bisq/bisq6.png" class="screenshot" />
+        <p>
+          If you are using a newer m1 mac when you open bisq for the first time
+          you may be prompted to install Rosetta if you have not done so before.
+          If you get a message:"Bisq" can't be opened because it was not
+          downloaded from the App Store, open system preferences and go to
+          security and privacy and hit open anyway. You have now installed bisq,
+          you can now eject the bisq volume and delete the .dmg and .asc files.
+        </p>
+        <div class="row">
+          <div class="column">
+            <img src="/images/bisq/bisq7.png" style="width: 95%" />
+          </div>
+          <div class="column">
+            <img src="/images/bisq/bisq8.png" style="width: 50%" />
+          </div>
+          <div class="column">
+            <img src="/images/bisq/bisq9.png" style="width: 110%" />
+          </div>
+        </div>
+        <li><h3>Getting started with Bisq</h3></li>
+        <p>
+          The first time you open Bisq you should be greeted by a screen like
+          this
+        </p>
+        <img src="/images/bisq/bisq10.png" class="screenshot" />
+        <p>Before you make a trade there are several things you should do:</p>
+        <p>Set a strong password</p>
+        <img src="/images/bisq/bisq11.png" class="screenshot" />
+        <p>
+          Write down your wallets seed words, these words give access to any
+          funds in your Bisq wallet so keep it secure
+        </p>
+        <img src="/images/bisq/bisq12.png" class="screenshot" />
+        <p>
+          Create a payment account (faster payments is a popular payment method
+          in the uk)
+        </p>
+        <img src="/images/bisq/bisq13.png" class="screenshot" />
+        <p>Backup Bisq, this should be done regularly</p>
+        <img src="/images/bisq/bisq14.png" class="screenshot" />
+        <li><h3>Making a trade</h3></li>
+        <img src="/images/bisq/bisq15.png" class="screenshot" />
+        <p>
+          You are now ready to make a trade, you can either take an existing
+          offer or create a new offer, the maker fees are 0.1% and the taker
+          fees are 0.7%. When creating an offer you can set a percentage to
+          deviate from the current market price, so it often pays to be patient
+          and create your own offer.
+        </p>
+        <img src="/images/bisq/bisq16.png" class="screenshot" />
+        <br />
+        <img src="/images/bisq/bisq17.png" class="screenshot" />
+        <p>
+          As you can see from the images above you need to "Fund your offer",
+          this is to pay for the trading fee and the security deposit (more on
+          this later). This is awkward as you need bitcoin to be able to buy
+          bitcoin, you could buy some bitcoin off a friend or use a
+          <a href="https://coinatmradar.com" target="_blank">bitcoin atm</a>.
+        </p>
+      </ol>
+    </section>
+    <section>
+      <h2>Bisq 2.0 (Misq)</h2>
+      <p>
+        Some upcoming features I got from
+        <a href="https://youtu.be/UOarJpbg4EY" target="_blank">this</a> video.
+      </p>
+      <ul>
+        <li>other financial contracts e.g loans, options</li>
+        <li>integrating external wallets e.g hardware wallets</li>
+        <li>keep offers online when you are offline</li>
+        <li>social and community aspects</li>
+        <li>web and mobile versions</li>
+        <li>other trade protocols</li>
+        <li>release date: TBC</li>
+      </ul>
+    </section>
+    <footer-component></footer-component>
+  </body>
 </html>
