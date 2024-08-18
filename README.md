@@ -1,3 +1,4 @@
-# Satsuma-LN.github.io
+# edwardbickerton.github.io
+
 Welcome to my website's github repository!  
-Go to [Satsuma-LN.github.io](https://Satsuma-LN.github.io) to view my website.
+Go to [edwardbickerton.github.io](https://edwardbickerton.github.io) to view my website.
